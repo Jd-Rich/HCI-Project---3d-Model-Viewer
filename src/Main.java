@@ -4,11 +4,37 @@ import javax.vecmath.*;
 import com.sun.j3d.utils.geometry.*;
 import com.sun.j3d.utils.universe.*;
 import com.sun.j3d.utils.image.TextureLoader;
+import java.awt.DisplayMode;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.glu.GLU;
+import javax.swing.JFrame;
+import com.jogamp.opengl.util.FPSAnimator;
+
 
 public class Main {
 
     public static void main(String[] args) {
-        
+        //Create GLprofile and capabilities objects
+        final GLProfile profile = GLProfile.get(GLProfile.GL2);
+        GLCapabilities capabilities = new GLCapabilities(profile);
+
+        //Create the canvas
+        final GLCanvas canvas = new GLCanvas(capabilities);
+        JavaFrame javaCanvas = new JavaFrame();
+        canvas.addGLEventListener(javaCanvas);
+        canvas.setSize(400, 400);
+
+        //create the frame
+        final JFrame frame = new JFrame("Frame");
+
+        //add the frame to the canvas
+        frame.getContentPane().add(canvas);
+        frame.setSize(frame.getContentPane().getPreferredSize());
+        frame.setVisible(true);
 
     }
 }
