@@ -24,17 +24,20 @@ public class Main {
 
         //Create the canvas
         final GLCanvas canvas = new GLCanvas(capabilities);
-        JavaFrame javaCanvas = new JavaFrame();
-        canvas.addGLEventListener(javaCanvas);
+        //JavaFrame javaCanvas = new JavaFrame();
+        Cube cube = new Cube();
+        canvas.addGLEventListener(cube);
         canvas.setSize(400, 400);
 
         //create the frame
-        final JFrame frame = new JFrame("Frame");
+        final JFrame frame = new JFrame("cube");
 
         //add the frame to the canvas
         frame.getContentPane().add(canvas);
         frame.setSize(frame.getContentPane().getPreferredSize());
         frame.setVisible(true);
+        final FPSAnimator animator = new FPSAnimator(canvas, 300, true);
 
+        animator.start();
     }
 }
