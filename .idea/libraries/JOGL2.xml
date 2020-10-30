@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="JOGL2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/OneDrive/Documents/WSU/CSC3400/3D_Viewer_Project/JOGL2" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/OneDrive/Documents/WSU/CSC3400/3D_Viewer_Project/JOGL2" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/OneDrive/Documents/WSU/CSC3400/3D_Viewer_Project/JOGL2" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/OneDrive/Documents/WSU/CSC3400/3D_Viewer_Project/JOGL2" recursive="false" type="SOURCES" />
+  </library>
+</component>
