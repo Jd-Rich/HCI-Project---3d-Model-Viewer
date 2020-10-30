@@ -1,4 +1,38 @@
-import java.awt.DisplayMode;
+import java.awt.Color;
+
+final class Cube extends SceneObject {
+    protected Cube(Color color, double scale, double xTranslation, double yTranslation, double zTranslation) {
+        super(color, scale, xTranslation, yTranslation, zTranslation);
+    }
+
+    @Override
+    protected double[][] getVertices() {
+        return new double[][] {
+                {-1.0, -1.0, 1.0},
+                {1.0, -1.0, 1.0},
+                {1.0, 1.0, 1.0},
+                {-1.0, 1.0, 1.0},
+                {-1.0, -1.0, -1.0},
+                {1.0, -1.0, -1.0},
+                {1.0, 1.0, -1.0},
+                {-1.0, 1.0, -1.0}
+        };
+    }
+
+    @Override
+    protected int[][] getFaces() {
+        return new int[][] {
+                {0, 1, 2, 3},
+                {3, 2, 6, 7},
+                {0, 3, 7, 4},
+                {1, 0, 4, 5},
+                {2, 1, 5, 6},
+                {6, 5, 4, 7}
+        };
+    }
+}
+
+/*import java.awt.DisplayMode;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -102,3 +136,4 @@ public class Cube implements GLEventListener{
         gl.glLoadIdentity();
     }
 }
+*/

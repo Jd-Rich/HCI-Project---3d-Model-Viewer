@@ -18,7 +18,9 @@ import com.jogamp.opengl.util.FPSAnimator;
 public class Main {
 
     public static void main(String[] args) {
-        //Create GLprofile and capabilities objects
+        final Application newApplication = new Application();
+
+        /*//Create GLprofile and capabilities objects
         final GLProfile profile = GLProfile.get(GLProfile.GL2);
         GLCapabilities capabilities = new GLCapabilities(profile);
 
@@ -42,6 +44,6 @@ public class Main {
         frame.setVisible(true);
         final FPSAnimator animator = new FPSAnimator(canvas, 300, true);
 
-        animator.start();
+        animator.start();*/
     }
 }
