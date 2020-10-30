@@ -1,13 +1,9 @@
-import java.awt.DisplayMode;
 import com.jogamp.opengl.*;
-import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
-import com.jogamp.opengl.util.FPSAnimator;
-import javax.swing.JFrame;
+
 
 public class Pyramid implements GLEventListener {
-    public static DisplayMode displayMode, displayModeOld;
-    private GLU glu = new GLU();
+    final GLU glu = new GLU();
     private float rtri = 0.0f;
 
     @Override
@@ -37,30 +33,38 @@ public class Pyramid implements GLEventListener {
         // Begin drawing the pyramid
         gl.glBegin(GL2.GL_TRIANGLES);
 
-        // Draw 3D shape of pyramid with light blue sides and yellow edges
+        // Draw 3D shape of pyramid with red, blue, green, and yellow sides
         // Front side of pyramid
-        gl.glColor4f(0.0f, 1.0f, 1.0f, 1.0f); // Face color
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Bottom edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Left edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Right edge
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Left edge
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glVertex3f(1.0f, -1.0f, 1.0f); // Right edge
 
         // Right side of pyramid
-        gl.glColor4f(0.0f, 1.0f, 1.0f, 1.0f); // Face color
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Bottom edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Left edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Right edge
+        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
+        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glVertex3f(1.0f, -1.0f, 1.0f); // Left edge
+        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glVertex3f(1.0f, -1.0f, -1.0f); // Right edge
 
         // Left side of pyramid
-        gl.glColor4f(0.0f, 1.0f, 1.0f, 1.0f); // Face color
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Bottom edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Left edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Right edge
+        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
+        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glVertex3f(1.0f, -1.0f, -1.0f); // Left edge
+        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Right edge
 
         // Bottom side of pyramid
-        gl.glColor4f(0.0f, 1.0f, 1.0f, 1.0f); // Face color
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Bottom edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Left edge
-        gl.glVertex4f(1.0f, 1.0f, 0.0f, 0.0f); // Right edge
+        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
+        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Left edge
+        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Right edge
 
         //End pyramid drawing
         gl.glEnd();

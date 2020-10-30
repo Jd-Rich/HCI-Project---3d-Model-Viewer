@@ -28,7 +28,7 @@ public class Main {
         Cube cube = new Cube();
         Pyramid pyramid = new Pyramid();
 
-        //canvas.addGLEventListener(cube);
+        canvas.addGLEventListener(cube);
         canvas.addGLEventListener(pyramid);
 
         canvas.setSize(400, 400);
