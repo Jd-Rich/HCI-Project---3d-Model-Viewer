@@ -26,7 +26,11 @@ public class Main {
         final GLCanvas canvas = new GLCanvas(capabilities);
         //JavaFrame javaCanvas = new JavaFrame();
         Cube cube = new Cube();
-        canvas.addGLEventListener(cube);
+        Pyramid pyramid = new Pyramid();
+
+        //canvas.addGLEventListener(cube);
+        canvas.addGLEventListener(pyramid);
+
         canvas.setSize(400, 400);
 
         //create the frame
