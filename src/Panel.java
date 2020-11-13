@@ -50,6 +50,7 @@ public class Panel  extends Frame{
             }
         });
 
+        
         changeShape.setMargin(new Insets(2, 2, 2, 2));
         changeShape.addActionListener(new ActionListener() {
             @Override
@@ -72,8 +73,5 @@ public class Panel  extends Frame{
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
         gui.add(buttons, BorderLayout.PAGE_END);
-
-        final FPSAnimator animator = new FPSAnimator(glcanvas, 300, true);
-        animator.start();
     }
 }
