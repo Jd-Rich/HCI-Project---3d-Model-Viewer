@@ -13,13 +13,19 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 public class Panel  extends Frame{
+    //Boolean variables for which shape to change to
+    boolean changeToCube = false;
+    boolean changeToPyramid = false;
+
     //Shapes
     Cube cube = new Cube();
     Pyramid pyramid = new Pyramid();
 
+    /*
     //Buttons for the frame
-    private JButton changeShape = new JButton("Change Shape");
-
+    private JButton changeShapeToPyramid = new JButton("Pyramid");
+    private JButton changeShapeToCube = new JButton("Cube");
+    */
     //GL setup
     GLProfile profile = GLProfile.get(GLProfile.GL2);
     GLCapabilities capabilities = new GLCapabilities(profile);
@@ -28,7 +34,7 @@ public class Panel  extends Frame{
     //The GUI
     Frame gui = new Frame("Frame");
 
-    public Component getGUI() {
+    public void getGUI() {
         glcanvas.addGLEventListener(cube);
         glcanvas.setSize(400, 400);
 
@@ -50,21 +56,41 @@ public class Panel  extends Frame{
             }
         });
 
-        
-        changeShape.setMargin(new Insets(2, 2, 2, 2));
-        changeShape.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeShape_ActionPerformed(e);
-            }
-        });
-        buttons.add(changeShape);
-        return gui;
+
+       JButton changeShapeToPyramid = new JButton(new AbstractAction("Pyramid") {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               changeShapeToPyramid_ActionPerformed(e);
+           }
+       });
+       buttons.add(changeShapeToPyramid);
+
+
+       JButton changeShapeToCube = new JButton(new AbstractAction("Cube") {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               changeShapeToCube_ActionPerformed(e);
+           }
+       });
+       buttons.add(changeShapeToCube);
+
     }
 
     //methods
-    public void changeShape_ActionPerformed(ActionEvent e) {
+    public void changeShapeToPyramid_ActionPerformed(ActionEvent e) {
         glcanvas.addGLEventListener(pyramid);
+        glcanvas.setSize(400, 400);
+
+        gui.setSize(600,600);
+        gui.add(glcanvas);
+        gui.setVisible(true);
+
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        gui.add(buttons, BorderLayout.PAGE_END);
+    }
+
+    public void changeShapeToCube_ActionPerformed(ActionEvent e) {
+        glcanvas.addGLEventListener(cube);
         glcanvas.setSize(400, 400);
 
         gui.setSize(600,600);
