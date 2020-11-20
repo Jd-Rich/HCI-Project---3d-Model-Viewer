@@ -1,4 +1,7 @@
 import java.awt.DisplayMode;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -12,7 +15,7 @@ import javax.swing.JFrame;
 import com.jogamp.opengl.util.FPSAnimator;
 
 
-public class Cube implements GLEventListener{
+public class Cube implements GLEventListener, MouseListener {
     public static DisplayMode displayMode, displayModeOld;
     private GLU glu = new GLU();
     private float rquad = 0.0f;
@@ -101,4 +104,18 @@ public class Cube implements GLEventListener{
         gl.glMatrixMode( GL2.GL_MODELVIEW );
         gl.glLoadIdentity();
     }
+
+    //Handles when the mouse is pressed and released for rotating the cube
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseClicked(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e) { }
+    public void mouseExited(MouseEvent e) { }
+
 }
