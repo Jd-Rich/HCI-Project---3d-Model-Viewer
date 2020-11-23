@@ -100,7 +100,7 @@ public class Panel extends Frame implements AWTEventListener {
             KeyEvent key = (KeyEvent)event;
             if(key.getID() == KeyEvent.KEY_PRESSED) {
                 if(key.getKeyChar() == 'w') {
-                    cube.reshape();
+                   // cube.reshape();
                 }
                 key.consume();
             }
