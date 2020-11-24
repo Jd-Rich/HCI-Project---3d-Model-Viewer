@@ -7,6 +7,7 @@ import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.util.gl2.GLUT;  // for drawing GLUT objects (such as the teapot)
 
+
 /**
  * A template for a basic JOGL application with support for animation, and for
  * keyboard and mouse event handling, and for a menu.  To enable the support,
@@ -27,6 +28,7 @@ public class MainWindow extends JPanel implements
         /* TODO: If you want to have a menu, comment out the following line. */
         window.setJMenuBar(panel.createMenuBar());
         window.pack();
+        window.setPreferredSize(new Dimension(600,600));
         window.setLocation(50,50);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
@@ -45,10 +47,12 @@ public class MainWindow extends JPanel implements
     private GLUT glut = new GLUT();  // TODO: For drawing GLUT objects, otherwise, not needed.
 
     public MainWindow() {
-        GLCapabilities caps = new GLCapabilities(null);
+        GLProfile profile = GLProfile.get(GLProfile.GL2);
+        GLCapabilities caps = new GLCapabilities(profile);
+
         display = new GLJPanel(caps);
         display.setPreferredSize( new Dimension(600,600) );  // TODO: set display size here
-        display.addGLEventListener(cube);
+        //display.addGLEventListener(cube);
         setLayout(new BorderLayout());
         add(display,BorderLayout.WEST);
 
@@ -59,7 +63,7 @@ public class MainWindow extends JPanel implements
         getShapeButtons(display, buttonPanel);
 
         // TODO:  Uncomment the next two lines to enable keyboard event handling
-        //requestFocusInWindow();
+        //display.requestFocusInWindow();
         display.addKeyListener(this);
 
         // TODO:  Uncomment the next one or two lines to enable mouse event handling
@@ -75,14 +79,18 @@ public class MainWindow extends JPanel implements
         JButton selectCube = new JButton(new AbstractAction("Cube") {
             @Override
             public void actionPerformed(ActionEvent e) {
+                display.repaint();
                 display.addGLEventListener(cube);
+                display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectCube);
 
         JButton selectPyramid = new JButton(new AbstractAction("Pyramid") {
             @Override
             public void actionPerformed(ActionEvent e) {
+                display.repaint();
                 display.addGLEventListener(pyramid);
+                display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectPyramid);
 

@@ -19,7 +19,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 public class Cube implements GLEventListener, MouseListener {
     public static DisplayMode displayMode, displayModeOld;
     private GLU glu = new GLU();
-    private float rquad = 0.0f;
+    //private float rquad = 0.0f;
 
     private double scale;
     private float rotateX, rotateY;
