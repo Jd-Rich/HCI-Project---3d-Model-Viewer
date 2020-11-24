@@ -40,6 +40,8 @@ public class MainWindow extends JPanel implements
 
     private GLJPanel display;
     private JPanel buttonPanel;
+    private JPanel sliderPanel;
+
     private Timer animationTimer;
 
     private int frameNumber = 0;  // The current frame number for an animation.
@@ -56,9 +58,24 @@ public class MainWindow extends JPanel implements
         setLayout(new BorderLayout());
         add(display,BorderLayout.WEST);
 
+
         // TODO:  Other components could be added to the main panel.
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15));
-        add(buttonPanel, BorderLayout.SOUTH);
+        JPanel commandPanel = new JPanel(new BorderLayout());
+        commandPanel.add(buttonPanel, BorderLayout.NORTH);
+
+        //add(buttonPanel, BorderLayout.SOUTH);
+
+        sliderPanel = new JPanel(new BorderLayout());
+        JSlider scaleSlider = new JSlider(0, 5, 1);
+        JLabel scaleSliderLabel = new JLabel("     Scale Model ");
+        JLabel spacer = new JLabel(" " );
+        sliderPanel.add(spacer, BorderLayout.SOUTH);
+        sliderPanel.add(scaleSliderLabel, BorderLayout.WEST);
+        sliderPanel.add(scaleSlider, BorderLayout.CENTER);
+        commandPanel.add(sliderPanel, BorderLayout.SOUTH);
+
+        add(commandPanel, BorderLayout.SOUTH);
 
         getShapeButtons(display, buttonPanel);
 
