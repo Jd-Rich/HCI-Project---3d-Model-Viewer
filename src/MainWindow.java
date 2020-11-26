@@ -202,9 +202,26 @@ public class MainWindow extends JPanel implements
         else if (key == KeyEvent.VK_RIGHT) { cube.setRotateY(cube.getRotateY() + 15); }
         else if (key == KeyEvent.VK_DOWN) { cube.setRotateX(cube.getRotateX() + 15); }
         else if (key == KeyEvent.VK_UP) { cube.setRotateX(cube.getRotateX() - 15); }
+        else if (key == KeyEvent.VK_W) {cube.setRotateX(cube.getRotateX() - 15); }
+        else if (key == KeyEvent.VK_D) {cube.setRotateY(cube.getRotateY() + 15); }
+        else if (key == KeyEvent.VK_A) {cube.setRotateY(cube.getRotateY() - 15); }
+        else if (key == KeyEvent.VK_S) {cube.setRotateX(cube.getRotateX() + 15); }
         else if (key == KeyEvent.VK_HOME) {
             cube.setRotateY(0);
             cube.setRotateX(0);
+        }
+
+        if (key == KeyEvent.VK_LEFT) { pyramid.setRotateY(pyramid.getRotateY() - 15); }
+        else if (key == KeyEvent.VK_RIGHT) { pyramid.setRotateY(pyramid.getRotateY() + 15); }
+        else if (key == KeyEvent.VK_DOWN) { pyramid.setRotateX(pyramid.getRotateX() + 15); }
+        else if (key == KeyEvent.VK_UP) { pyramid.setRotateX(pyramid.getRotateX() - 15); }
+        else if (key == KeyEvent.VK_W) {pyramid.setRotateX(pyramid.getRotateX() - 15); }
+        else if (key == KeyEvent.VK_D) {pyramid.setRotateY(pyramid.getRotateY() + 15); }
+        else if (key == KeyEvent.VK_A) {pyramid.setRotateY(pyramid.getRotateY() - 15); }
+        else if (key == KeyEvent.VK_S) {pyramid.setRotateX(pyramid.getRotateX() + 15); }
+        else if (key == KeyEvent.VK_HOME) {
+            pyramid.setRotateY(0);
+            pyramid.setRotateX(0);
         }
         display.repaint();  // Causes the display() function to be called.
     }
