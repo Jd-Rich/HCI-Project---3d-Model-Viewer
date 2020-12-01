@@ -2,6 +2,7 @@ import java.awt.DisplayMode;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -18,17 +19,42 @@ import com.jogamp.opengl.util.FPSAnimator;
 public class Cube implements GLEventListener, MouseListener {
     public static DisplayMode displayMode, displayModeOld;
     private GLU glu = new GLU();
-    private float rquad = 0.0f;
+    //private float rquad = 0.0f;
+
+    private float scale;
+    private float rotateX, rotateY;
+
+    public Cube() {
+        this.rotateX = 0.0f;
+        this.rotateY = 0.0f;
+        this.scale = 0.25f;
+    }
+
+    public float getRotateX() { return this.rotateX; }
+    public float getRotateY() { return this.rotateY; }
+    public float getScale() { return this.scale; }
+
+    public void setRotateX(float rotateX) { this.rotateX = rotateX; }
+    public void setRotateY(float rotateY) { this.rotateY = rotateY; }
+    public void setScale(float scale) { this.scale = scale; }
 
     @Override
     public void display(GLAutoDrawable drawable) {
         final GL2 gl = drawable.getGL().getGL2();
-        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        gl.glClearColor(0, 0, 0, 1.0f);
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+
+        gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        gl.glTranslatef(0f, 0f, -5.0f);
+        //gl.glOrtho(-scale,scale,-scale,scale,-2*scale,2*scale);
+        gl.glScalef(scale,scale,scale);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        //gl.glTranslatef(0f, 0f, -5.0f);
+        gl.glLoadIdentity();
 
         //Rotate the cube on X, Y, Z
-        gl.glRotatef(rquad, 1.0f, 1.0f, 1.0f);
+        gl.glRotatef(rotateY, 0, 1.0f, 0);
+        gl.glRotatef(rotateX, 1.0f, 0, 0);
 
         //Each side of the cube has a different color
         gl.glBegin(GL2.GL_QUADS); //starts the cube drawing
@@ -72,7 +98,8 @@ public class Cube implements GLEventListener, MouseListener {
         gl.glEnd();
         gl.glFlush();
 
-        rquad -= 0.15f;
+        rotateX -= 0.15f;
+        rotateY -= 0.15f;
     }
 
     @Override
