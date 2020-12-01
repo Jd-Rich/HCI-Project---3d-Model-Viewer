@@ -1,29 +1,27 @@
-import java.awt.DisplayMode;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLEventListener;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 
-import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import com.jogamp.opengl.util.FPSAnimator;
+/*
+Currently works where you have to click te lighting button, then click the shape to display and it will display
+the shape with lighting enabled.
+ */
 
-
-public class Cube implements GLEventListener, MouseListener {
+public class CubeLighting implements GLEventListener, MouseListener {
     public static DisplayMode displayMode, displayModeOld;
     private GLU glu = new GLU();
+    //private float rquad = 0.0f;
 
     private double scale;
     private float rotateX, rotateY;
 
-    public Cube() {
+    public CubeLighting() {
         this.rotateX = 0.0f;
         this.rotateY = 0.0f;
         this.scale = 5.0;
@@ -38,11 +36,6 @@ public class Cube implements GLEventListener, MouseListener {
     @Override
     public void display(GLAutoDrawable drawable) {
         final GL2 gl = drawable.getGL().getGL2();
-
-        gl.glDisable( GL2.GL_LIGHTING );
-        gl.glDisable( GL2.GL_LIGHT0 );
-        gl.glDisable( GL2.GL_NORMALIZE );
-
         gl.glClearColor(0, 0, 0, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
@@ -100,6 +93,18 @@ public class Cube implements GLEventListener, MouseListener {
 
         rotateX -= 0.15f;
         rotateY -= 0.15f;
+
+
+        gl.glEnable( GL2.GL_LIGHTING );
+        gl.glEnable( GL2.GL_LIGHT0 );
+        gl.glEnable( GL2.GL_NORMALIZE );
+
+        float[] ambientLight = {.1f, 0.0f, 0.0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
+
+        float[] diffuseLight = {1f, 2f, 1f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
+
     }
 
     @Override
@@ -134,7 +139,7 @@ public class Cube implements GLEventListener, MouseListener {
 
     //Handles when the mouse is pressed and released for rotating the cube
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     public void mouseReleased(MouseEvent e) {

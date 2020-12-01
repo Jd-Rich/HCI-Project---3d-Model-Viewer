@@ -37,6 +37,7 @@ public class MainWindow extends JPanel implements
 
     Cube cube = new Cube();
     Pyramid pyramid = new Pyramid();
+    CubeLighting cubeLighting = new CubeLighting();
 
     private GLJPanel display;
     private JPanel buttonPanel;
@@ -111,6 +112,14 @@ public class MainWindow extends JPanel implements
             }
         }); buttonPanel.add(selectPyramid);
 
+        JButton addLighting = new JButton(new AbstractAction("Cube Lighting") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                display.repaint();
+                display.addGLEventListener(cubeLighting);
+                display.requestFocusInWindow();
+            }
+        }); buttonPanel.add(addLighting);
 
     }
 
@@ -219,6 +228,19 @@ public class MainWindow extends JPanel implements
         else if (key == KeyEvent.VK_D) {pyramid.setRotateY(pyramid.getRotateY() + 15); }
         else if (key == KeyEvent.VK_A) {pyramid.setRotateY(pyramid.getRotateY() - 15); }
         else if (key == KeyEvent.VK_S) {pyramid.setRotateX(pyramid.getRotateX() + 15); }
+        else if (key == KeyEvent.VK_HOME) {
+            pyramid.setRotateY(0);
+            pyramid.setRotateX(0);
+        }
+
+        if (key == KeyEvent.VK_LEFT) { cubeLighting.setRotateY(cubeLighting.getRotateY() - 15); }
+        else if (key == KeyEvent.VK_RIGHT) { cubeLighting.setRotateY(cubeLighting.getRotateY() + 15); }
+        else if (key == KeyEvent.VK_DOWN) { cubeLighting.setRotateX(cubeLighting.getRotateX() + 15); }
+        else if (key == KeyEvent.VK_UP) { cubeLighting.setRotateX(cubeLighting.getRotateX() - 15); }
+        else if (key == KeyEvent.VK_W) {cubeLighting.setRotateX(cubeLighting.getRotateX() - 15); }
+        else if (key == KeyEvent.VK_D) {cubeLighting.setRotateY(cubeLighting.getRotateY() + 15); }
+        else if (key == KeyEvent.VK_A) {cubeLighting.setRotateY(cubeLighting.getRotateY() - 15); }
+        else if (key == KeyEvent.VK_S) {cubeLighting.setRotateX(cubeLighting.getRotateX() + 15); }
         else if (key == KeyEvent.VK_HOME) {
             pyramid.setRotateY(0);
             pyramid.setRotateX(0);

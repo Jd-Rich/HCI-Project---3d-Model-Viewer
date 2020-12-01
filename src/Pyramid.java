@@ -81,6 +81,10 @@ public class Pyramid implements GLEventListener {
         //rtri += 0.2f;
         rotateX -= 0.15f;
         rotateY -= 0.15f;
+
+        gl.glDisable( GL2.GL_LIGHTING );
+        gl.glDisable( GL2.GL_LIGHT0 );
+        gl.glDisable( GL2.GL_NORMALIZE );
     }
 
     @Override
