@@ -6,20 +6,22 @@ public class Pyramid implements GLEventListener {
     private GLU glu = new GLU();
     //private float rtri = 0.0f;
 
-    private double scale;
+    private float scale;
     private float rotateX, rotateY;
 
     public Pyramid() {
         this.rotateX = 0.0f;
         this.rotateY = 0.0f;
-        this.scale = 5.0;
+        this.scale = 0.25f;
     }
 
     public float getRotateX() { return this.rotateX; }
     public float getRotateY() { return this.rotateY; }
+    public float getScale() { return this.scale; }
 
     public void setRotateX(float rotateX) { this.rotateX = rotateX; }
     public void setRotateY(float rotateY) { this.rotateY = rotateY; }
+    public void setScale(float scale) { this.scale = scale; }
 
     @Override
     public void display (GLAutoDrawable drawable) {
@@ -30,7 +32,8 @@ public class Pyramid implements GLEventListener {
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        gl.glOrtho(-scale,scale,-scale,scale,-2*scale,2*scale);
+        //gl.glOrtho(-scale,scale,-scale,scale,-2*scale,2*scale);
+        gl.glScalef(scale,scale,scale);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         //gl.glTranslatef(0f, 0f, -5.0f);
         gl.glLoadIdentity();

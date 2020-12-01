@@ -3,6 +3,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
+
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.util.gl2.GLUT;  // for drawing GLUT objects (such as the teapot)
@@ -19,7 +21,7 @@ import com.jogamp.opengl.util.gl2.GLUT;  // for drawing GLUT objects (such as th
  * from earlier versions; in particular, some of the package names have changed.
  */
 public class MainWindow extends JPanel implements
-        KeyListener, MouseListener, MouseMotionListener, ActionListener {
+        KeyListener, MouseListener, MouseMotionListener, ActionListener, ChangeListener {
 
     public static void main(String[] args) {
         JFrame window = new JFrame("3D Model Viewer");
@@ -41,6 +43,8 @@ public class MainWindow extends JPanel implements
     private GLJPanel display;
     private JPanel buttonPanel;
     private JPanel sliderPanel;
+
+    private JSlider scaleSlider;
 
     private Timer animationTimer;
 
@@ -67,7 +71,12 @@ public class MainWindow extends JPanel implements
         //add(buttonPanel, BorderLayout.SOUTH);
 
         sliderPanel = new JPanel(new BorderLayout());
-        JSlider scaleSlider = new JSlider(0, 5, 1);
+        scaleSlider = new JSlider(0, 100, 25);
+        scaleSlider.addChangeListener(this);
+        scaleSlider.setMajorTickSpacing(10);
+        scaleSlider.setMinorTickSpacing(1);
+        scaleSlider.setPaintTicks(true);
+
         JLabel scaleSliderLabel = new JLabel("     Scale Model ");
         JLabel spacer = new JLabel(" " );
         sliderPanel.add(spacer, BorderLayout.SOUTH);
@@ -79,10 +88,10 @@ public class MainWindow extends JPanel implements
 
         getShapeButtons(display, buttonPanel);
 
-        // TODO:  Uncomment the next two lines to enable keyboard event handling
-        //display.requestFocusInWindow();
-        display.addKeyListener(this);
 
+        // TODO:  Uncomment the next two lines to enable keyboard event handling
+        display.requestFocusInWindow();
+        display.addKeyListener(this);
         // TODO:  Uncomment the next one or two lines to enable mouse event handling
         display.addMouseListener(this);
         display.addMouseMotionListener(this);
@@ -198,13 +207,40 @@ public class MainWindow extends JPanel implements
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();  // Tells which key was pressed.
         // TODO:  Add code to respond to key presses.
-        if (key == KeyEvent.VK_LEFT) { cube.setRotateY(cube.getRotateY() - 15); }
-        else if (key == KeyEvent.VK_RIGHT) { cube.setRotateY(cube.getRotateY() + 15); }
-        else if (key == KeyEvent.VK_DOWN) { cube.setRotateX(cube.getRotateX() + 15); }
-        else if (key == KeyEvent.VK_UP) { cube.setRotateX(cube.getRotateX() - 15); }
+        if (key == KeyEvent.VK_LEFT) {
+            cube.setRotateY(cube.getRotateY() - 15);
+            pyramid.setRotateY(pyramid.getRotateY() - 15);
+        }
+        else if (key == KeyEvent.VK_RIGHT) {
+            cube.setRotateY(cube.getRotateY() + 15);
+            pyramid.setRotateY(pyramid.getRotateY() + 15);
+        }
+        else if (key == KeyEvent.VK_DOWN) {
+            cube.setRotateX(cube.getRotateX() + 15);
+            pyramid.setRotateX(pyramid.getRotateX() + 15);
+        }
+        else if (key == KeyEvent.VK_UP) {
+            cube.setRotateX(cube.getRotateX() - 15);
+            pyramid.setRotateX(pyramid.getRotateX() - 15);
+            }
         else if (key == KeyEvent.VK_HOME) {
             cube.setRotateY(0);
             cube.setRotateX(0);
+            pyramid.setRotateY(0);
+            pyramid.setRotateX(0);
+        }
+
+        else if (key == KeyEvent.VK_G) {
+
+            cube.setScale(cube.getScale() - 0.01f);
+            pyramid.setScale(pyramid.getScale() - 0.01f);
+            scaleSlider.setValue((int)(cube.getScale() * 100));
+        }
+
+        else if (key == KeyEvent.VK_H) {
+            cube.setScale(cube.getScale() + 0.01f);
+            pyramid.setScale(pyramid.getScale() + 0.01f);
+            scaleSlider.setValue((int)(cube.getScale() * 100));
         }
         display.repaint();  // Causes the display() function to be called.
     }
@@ -232,7 +268,19 @@ public class MainWindow extends JPanel implements
     public void keyReleased(KeyEvent e) {
     }
 
+    // Support for scale slider events
+    @Override
+    public void stateChanged(ChangeEvent event) {
 
+        System.out.println("SLIDER VALUE: " + scaleSlider.getValue());
+        cube.setScale(scaleSlider.getValue() / 100.0f);
+        pyramid.setScale(scaleSlider.getValue() / 100.0f);
+        System.out.println(cube.getScale());
+        System.out.println(pyramid.getScale());
+
+        display.repaint();
+
+    }
 
 
 
