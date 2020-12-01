@@ -21,7 +21,7 @@ import com.jogamp.opengl.util.gl2.GLUT;  // for drawing GLUT objects (such as th
  * from earlier versions; in particular, some of the package names have changed.
  */
 public class MainWindow extends JPanel implements
-        KeyListener, MouseListener, MouseMotionListener, ActionListener, ChangeListener {
+        ItemListener, KeyListener, MouseListener, MouseMotionListener, ActionListener, ChangeListener {
 
     public static void main(String[] args) {
         JFrame window = new JFrame("3D Model Viewer");
@@ -45,6 +45,7 @@ public class MainWindow extends JPanel implements
     private JPanel sliderPanel;
 
     private JSlider scaleSlider;
+    private JToggleButton playAnimation;
 
     private Timer animationTimer;
 
@@ -84,6 +85,14 @@ public class MainWindow extends JPanel implements
         sliderPanel.add(scaleSlider, BorderLayout.CENTER);
         commandPanel.add(sliderPanel, BorderLayout.SOUTH);
 
+        playAnimation = new JToggleButton("Pause Animation");
+        playAnimation.addItemListener(this);
+
+        JPanel miscPanel = new JPanel(new BorderLayout());
+        miscPanel.add(playAnimation, BorderLayout.NORTH);
+
+        add(miscPanel, BorderLayout.EAST);
+
         add(commandPanel, BorderLayout.SOUTH);
 
         getShapeButtons(display, buttonPanel);
@@ -101,6 +110,16 @@ public class MainWindow extends JPanel implements
 
     }
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (playAnimation.isSelected()) {
+            playAnimation.setText("Play Animation");
+            pauseAnimation();
+        }
+        else{
+            playAnimation.setText("Pause Animation");
+            startAnimation();}
+    }
     public void getShapeButtons(GLJPanel display, JPanel buttonPanel) {
         JButton selectCube = new JButton(new AbstractAction("Cube") {
             @Override
@@ -133,9 +152,35 @@ public class MainWindow extends JPanel implements
         JMenu menu = new JMenu("Menu"); // Create a menu and add it to the menu bar
         menubar.add(menu);
 
-        JMenuItem item = new JMenuItem("Quit");  // Create a menu command.
-        item.addActionListener(menuHandler);  // Set up handling for this command.
-        menu.add(item);  // Add the command to the menu.
+        // Scale menu option
+        JMenu scale = new JMenu("Scale");
+        menubar.add(scale);
+        JMenuItem scaleUp = new JMenuItem("Scale Up (H)");
+        JMenuItem scaleDown = new JMenuItem("Scale Down (G)");
+        scaleUp.addActionListener(menuHandler);
+        scaleDown.addActionListener(menuHandler);
+        scale.add(scaleUp);
+        scale.add(scaleDown);
+
+        // Rotate menu option
+        JMenu rotate = new JMenu("Rotate");
+        menubar.add(rotate);
+        JMenuItem rotateLeft = new JMenuItem("Rotate Left (Left)");
+        JMenuItem rotateRight = new JMenuItem("Rotate Right (Right)");
+        JMenuItem rotateUp = new JMenuItem("Rotate Up (Up)");
+        JMenuItem rotateDown = new JMenuItem("Rotate Down (Down)");
+        rotateLeft.addActionListener(menuHandler);
+        rotateRight.addActionListener(menuHandler);
+        rotateUp.addActionListener(menuHandler);
+        rotateDown.addActionListener(menuHandler);
+        rotate.add(rotateLeft);
+        rotate.add(rotateRight);
+        rotate.add(rotateUp);
+        rotate.add(rotateDown);
+
+        JMenuItem exit = new JMenuItem("Exit");  // Create a menu command.
+        exit.addActionListener(menuHandler);  // Set up handling for this command.
+        menu.add(exit);  // Add the command to the menu.
 
         // TODO:  Add additional menu commands and menus.
 
@@ -148,8 +193,28 @@ public class MainWindow extends JPanel implements
     private class MenuHandler implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
             String command = evt.getActionCommand();  // The text of the command.
-            if (command.equals("Quit")) {
+            if (command.equals("Exit")) {
                 System.exit(0);
+            } else if (command.equals("Scale Up (H)")) {
+                cube.setScale(cube.getScale() + 0.1f);
+                pyramid.setScale(pyramid.getScale() + 0.1f);
+                scaleSlider.setValue((int)(cube.getScale() * 100));
+            } else if (command.equals("Scale Down (G)")) {
+                cube.setScale(cube.getScale() - 0.1f);
+                pyramid.setScale(pyramid.getScale() - 0.1f);
+                scaleSlider.setValue((int)(cube.getScale() * 100));
+            } else if (command.equals("Rotate Left (Left)")) {
+                cube.setRotateY(cube.getRotateY() - 15);
+                pyramid.setRotateY(pyramid.getRotateY() - 15);
+            } else if (command.equals("Rotate Right (Right)")) {
+                cube.setRotateY(cube.getRotateY() + 15);
+                pyramid.setRotateY(pyramid.getRotateY() + 15);
+            } else if (command.equals("Rotate Up (Up)")) {
+                cube.setRotateX(cube.getRotateX() - 15);
+                pyramid.setRotateX(pyramid.getRotateX() - 15);
+            } else if (command.equals("Rotate Down (Down)")) {
+                cube.setRotateX(cube.getRotateX() + 15);
+                pyramid.setRotateX(pyramid.getRotateX() + 15);
             }
             // TODO: Implement any additional menu commands.
         }
@@ -242,6 +307,8 @@ public class MainWindow extends JPanel implements
             pyramid.setScale(pyramid.getScale() + 0.01f);
             scaleSlider.setValue((int)(cube.getScale() * 100));
         }
+
+
         display.repaint();  // Causes the display() function to be called.
     }
 
@@ -271,12 +338,10 @@ public class MainWindow extends JPanel implements
     // Support for scale slider events
     @Override
     public void stateChanged(ChangeEvent event) {
-
-        System.out.println("SLIDER VALUE: " + scaleSlider.getValue());
-        cube.setScale(scaleSlider.getValue() / 100.0f);
-        pyramid.setScale(scaleSlider.getValue() / 100.0f);
-        System.out.println(cube.getScale());
-        System.out.println(pyramid.getScale());
+        if (event.getSource() == scaleSlider) {
+            cube.setScale(scaleSlider.getValue() / 100.0f);
+            pyramid.setScale(scaleSlider.getValue() / 100.0f);
+        }
 
         display.repaint();
 
