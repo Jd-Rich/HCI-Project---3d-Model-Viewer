@@ -1,5 +1,3 @@
-
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -10,27 +8,20 @@ import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.util.gl2.GLUT;  // for drawing GLUT objects (such as the teapot)
 
 
-/**
- * A template for a basic JOGL application with support for animation, and for
- * keyboard and mouse event handling, and for a menu.  To enable the support,
- * uncomment the appropriate lines in main(), in the constructor, and in the
- * init() method.  See all the lines that are marked with "TODO".
- *
- * See the JOGL documentation at http://jogamp.org/jogl/www/
- * Note that this program is based on JOGL 2.3, which has some differences
- * from earlier versions; in particular, some of the package names have changed.
- */
+
 public class MainWindow extends JPanel implements
         ItemListener, KeyListener, MouseListener, MouseMotionListener, ActionListener, ChangeListener {
+
+
 
     public static void main(String[] args) {
         JFrame window = new JFrame("3D Model Viewer");
         MainWindow panel = new MainWindow();
         window.setContentPane(panel);
-        /* TODO: If you want to have a menu, comment out the following line. */
+
         window.setJMenuBar(panel.createMenuBar());
         window.pack();
-        window.setPreferredSize(new Dimension(600,600));
+        window.setPreferredSize(new Dimension(800,800));
         window.setLocation(50,50);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
@@ -51,27 +42,22 @@ public class MainWindow extends JPanel implements
 
     private int frameNumber = 0;  // The current frame number for an animation.
 
-    private GLUT glut = new GLUT();  // TODO: For drawing GLUT objects, otherwise, not needed.
-
     public MainWindow() {
         GLProfile profile = GLProfile.get(GLProfile.GL2);
         GLCapabilities caps = new GLCapabilities(profile);
 
         display = new GLJPanel(caps);
-        display.setPreferredSize( new Dimension(600,600) );  // TODO: set display size here
-        //display.addGLEventListener(cube);
+        display.setPreferredSize( new Dimension(600,600) );
         setLayout(new BorderLayout());
         add(display,BorderLayout.WEST);
 
-
-        // TODO:  Other components could be added to the main panel.
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15));
         JPanel commandPanel = new JPanel(new BorderLayout());
+        sliderPanel = new JPanel(new BorderLayout());
+
         commandPanel.add(buttonPanel, BorderLayout.NORTH);
 
-        //add(buttonPanel, BorderLayout.SOUTH);
 
-        sliderPanel = new JPanel(new BorderLayout());
         scaleSlider = new JSlider(0, 100, 25);
         scaleSlider.addChangeListener(this);
         scaleSlider.setMajorTickSpacing(10);
@@ -85,7 +71,10 @@ public class MainWindow extends JPanel implements
         sliderPanel.add(scaleSlider, BorderLayout.CENTER);
         commandPanel.add(sliderPanel, BorderLayout.SOUTH);
 
-        playAnimation = new JToggleButton("Pause Animation");
+        playAnimation = new JToggleButton();
+        playAnimation.setText("Animation Playing");
+        playAnimation.setBackground(Color.GREEN);
+        playAnimation.setForeground(Color.WHITE);
         playAnimation.addItemListener(this);
 
         JPanel miscPanel = new JPanel(new BorderLayout());
@@ -97,15 +86,11 @@ public class MainWindow extends JPanel implements
 
         getShapeButtons(display, buttonPanel);
 
-
-        // TODO:  Uncomment the next two lines to enable keyboard event handling
         display.requestFocusInWindow();
         display.addKeyListener(this);
-        // TODO:  Uncomment the next one or two lines to enable mouse event handling
         display.addMouseListener(this);
         display.addMouseMotionListener(this);
 
-        //TODO:  Uncomment the following line to start the animation
         startAnimation();
 
     }
@@ -113,11 +98,13 @@ public class MainWindow extends JPanel implements
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (playAnimation.isSelected()) {
-            playAnimation.setText("Play Animation");
+            playAnimation.setText("Animation Paused");
+            playAnimation.setBackground(Color.RED);
             pauseAnimation();
         }
         else{
-            playAnimation.setText("Pause Animation");
+            playAnimation.setText("Animation Playing");
+            playAnimation.setBackground(Color.GREEN);
             startAnimation();}
     }
     public void getShapeButtons(GLJPanel display, JPanel buttonPanel) {
@@ -182,14 +169,9 @@ public class MainWindow extends JPanel implements
         exit.addActionListener(menuHandler);  // Set up handling for this command.
         menu.add(exit);  // Add the command to the menu.
 
-        // TODO:  Add additional menu commands and menus.
-
         return menubar;
     }
 
-    /**
-     * A class to define the ActionListener object that will respond to menu commands.
-     */
     private class MenuHandler implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
             String command = evt.getActionCommand();  // The text of the command.
@@ -216,23 +198,17 @@ public class MainWindow extends JPanel implements
                 cube.setRotateX(cube.getRotateX() + 15);
                 pyramid.setRotateX(pyramid.getRotateX() + 15);
             }
-            // TODO: Implement any additional menu commands.
         }
     }
 
 // --------------------------- animation support ---------------------------
 
-    /* You can call startAnimation() to run an animation.  A frame will be drawn every
-     * 30 milliseconds (can be changed in the call to glutTimerFunc.  The global frameNumber
-     * variable will be incremented for each frame.  Call pauseAnimation() to stop animating.
-     */
 
-    private boolean animating;  // True if animation is running.  Do not set directly.
-    // This is set by startAnimation() and pauseAnimation().
+
+    private boolean animating;  // True if animation is running.
 
     private void updateFrame() {
         frameNumber++;
-        // TODO:  add any other updating required for the next frame.
     }
 
     public void startAnimation() {
@@ -260,15 +236,6 @@ public class MainWindow extends JPanel implements
 
     // ------------ Support for keyboard handling  ------------
 
-    /**
-     * Called when the user presses any key on the keyboard, including
-     * special keys like the arrow keys, the function keys, and the shift key.
-     * Note that the value of key will be one of the constants from
-     * the KeyEvent class that identify keys such as KeyEvent.VK_LEFT,
-     * KeyEvent.VK_RIGHT, KeyEvent.VK_UP, and KeyEvent.VK_DOWN for the arrow
-     * keys, KeyEvent.VK_SHIFT for the shift key, and KeyEvent.VK_F1 for a
-     * function key.
-     */
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();  // Tells which key was pressed.
         // TODO:  Add code to respond to key presses.
@@ -312,27 +279,28 @@ public class MainWindow extends JPanel implements
         display.repaint();  // Causes the display() function to be called.
     }
 
-    /**
-     * Called when the user types a character.  This function is called in
-     * addition to one or more calls to keyPressed and keyTyped. Note that ch is an
-     * actual character such as 'A' or '@'.
-     */
+
     public void keyTyped(KeyEvent e) {
         char ch = e.getKeyChar();  // Which character was typed.
         // TODO:  Add code to respond to the character being typed.
         if (ch == ' ') {
-            if (animationTimer != null && animationTimer.isRunning())
+            if (animationTimer != null && animationTimer.isRunning()) {
+                playAnimation.setText("Animation Paused");
+                playAnimation.setBackground(Color.RED);
                 pauseAnimation();
-            else
+            }
+            else {
+                playAnimation.setText("Animation Playing");
+                playAnimation.setBackground(Color.GREEN);
                 startAnimation();
+            }
         }
         display.repaint();  // Causes the display() function to be called.
     }
 
-    /**
-     * Called when the user releases any key.
-     */
+
     public void keyReleased(KeyEvent e) {
+        repaint();
     }
 
     // Support for scale slider events
@@ -380,7 +348,6 @@ public class MainWindow extends JPanel implements
             return;
         }
         dragging = false;
-        // TODO:  finish drag (generally nothing to do here)
     }
 
     /**

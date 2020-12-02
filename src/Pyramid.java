@@ -21,7 +21,10 @@ public class Pyramid implements GLEventListener {
 
     public void setRotateX(float rotateX) { this.rotateX = rotateX; }
     public void setRotateY(float rotateY) { this.rotateY = rotateY; }
-    public void setScale(float scale) { this.scale = scale; }
+    public void setScale(float scale) {
+        if(scale <= 0.0f) scale = 0.0f;
+        else if(scale >= 1.0f) scale = 1.0f;
+        this.scale = scale; }
 
     @Override
     public void display (GLAutoDrawable drawable) {

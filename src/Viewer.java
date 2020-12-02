@@ -1,4 +1,4 @@
-import com.jogamp.opengl.*;
+/*import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 
 import javax.swing.JFrame;
@@ -69,4 +69,4 @@ public class Viewer extends JFrame implements GLEventListener {
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 
     }
-}
+}*/

@@ -1,25 +1,13 @@
 import java.awt.DisplayMode;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLEventListener;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.awt.GLCanvas;
-import com.jogamp.opengl.glu.GLU;
-
-import javax.swing.JFrame;
-
-import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 
 
-public class Cube implements GLEventListener, MouseListener {
+
+public class Cube implements GLEventListener {
     public static DisplayMode displayMode, displayModeOld;
     private GLU glu = new GLU();
-    //private float rquad = 0.0f;
 
     private float scale;
     private float rotateX, rotateY;
@@ -36,7 +24,10 @@ public class Cube implements GLEventListener, MouseListener {
 
     public void setRotateX(float rotateX) { this.rotateX = rotateX; }
     public void setRotateY(float rotateY) { this.rotateY = rotateY; }
-    public void setScale(float scale) { this.scale = scale; }
+    public void setScale(float scale) {
+        if(scale <= 0.0f) scale = 0.0f;
+        else if(scale >= 1.0f) scale = 1.0f;
+        this.scale = scale; }
 
     @Override
     public void display(GLAutoDrawable drawable) {
@@ -46,10 +37,8 @@ public class Cube implements GLEventListener, MouseListener {
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        //gl.glOrtho(-scale,scale,-scale,scale,-2*scale,2*scale);
         gl.glScalef(scale,scale,scale);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
-        //gl.glTranslatef(0f, 0f, -5.0f);
         gl.glLoadIdentity();
 
         //Rotate the cube on X, Y, Z
@@ -131,18 +120,4 @@ public class Cube implements GLEventListener, MouseListener {
         gl.glMatrixMode( GL2.GL_MODELVIEW );
         gl.glLoadIdentity();
     }
-
-    //Handles when the mouse is pressed and released for rotating the cube
-    public void mousePressed(MouseEvent e) {
-        
-    }
-
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    public void mouseClicked(MouseEvent e) { }
-    public void mouseEntered(MouseEvent e) { }
-    public void mouseExited(MouseEvent e) { }
-
 }
