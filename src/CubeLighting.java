@@ -34,9 +34,6 @@ public class CubeLighting implements GLEventListener, MouseListener {
     public void setRotateY(float rotateY) { this.rotateY = rotateY; }
     public void setScale(float scale) { this.scale = scale; }
 
-    public void resetScale() {
-        this.scale = 0.25f;
-    }
 
     @Override
     public void display(GLAutoDrawable drawable) {

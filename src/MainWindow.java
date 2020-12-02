@@ -111,7 +111,6 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(cube);
-                cube.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectCube);
@@ -121,7 +120,6 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(pyramid);
-                pyramid.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectPyramid);
@@ -131,7 +129,6 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(paddle);
-                paddle.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(addPaddle);
@@ -141,7 +138,6 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(cubeLighting);
-                cubeLighting.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(addCubeLighting);
@@ -151,7 +147,6 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(pyramidLighting);
-                pyramidLighting.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(addPyramidLighting);
@@ -357,8 +352,8 @@ public class MainWindow extends JPanel implements
         cube.setScale(scaleSlider.getValue() / 100.0f);
         pyramid.setScale(scaleSlider.getValue() / 100.0f);
         paddle.setScale(scaleSlider.getValue() / 100.0f);
-        cubeLighting.setScale(scaleSlider.getValue() / 100.0f);
-        pyramidLighting.setScale(scaleSlider.getValue() / 100.0f);
+        //cubeLighting.setScale(scaleSlider.getValue() / 100.0f);
+        //pyramidLighting.setScale(scaleSlider.getValue() / 100.0f);
         //System.out.println(cube.getScale());
         //System.out.println(pyramid.getScale());
 
