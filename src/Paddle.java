@@ -1,10 +1,33 @@
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.glu.GLU;
+
 import java.util.Random;
 
 public class Paddle implements GLEventListener {
     private float rotation = 0.0f;
+
+    private float scale;
+    private float rotateX, rotateY;
+
+    public Paddle() {
+        this.rotateX = 0.0f;
+        this.rotateY = 0.0f;
+        this.scale = 0.25f;
+    }
+
+    public float getRotateX() { return this.rotateX; }
+    public float getRotateY() { return this.rotateY; }
+    public float getScale() { return this.scale; }
+
+    public void setRotateX(float rotateX) { this.rotateX = rotateX; }
+    public void setRotateY(float rotateY) { this.rotateY = rotateY; }
+    public void setScale(float scale) { this.scale = scale; }
+
+    public void resetScale() {
+        this.scale = 0.25f;
+    }
 
     @Override
     public void display(GLAutoDrawable drawable) {

@@ -111,6 +111,7 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(cube);
+                cube.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectCube);
@@ -120,15 +121,27 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(pyramid);
+                pyramid.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectPyramid);
+
+        JButton addPaddle = new JButton(new AbstractAction("Paddle") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                display.repaint();
+                display.addGLEventListener(paddle);
+                paddle.resetScale();
+                display.requestFocusInWindow();
+            }
+        }); buttonPanel.add(addPaddle);
 
         JButton addCubeLighting = new JButton(new AbstractAction("Cube Lighting") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(cubeLighting);
+                cubeLighting.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(addCubeLighting);
@@ -138,18 +151,10 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(pyramidLighting);
+                pyramidLighting.resetScale();
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(addPyramidLighting);
-
-        JButton addPaddle = new JButton(new AbstractAction("Paddle") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                display.repaint();
-                display.addGLEventListener(paddle);
-                display.requestFocusInWindow();
-            }
-        }); buttonPanel.add(addPaddle);
 
     }
 
@@ -242,48 +247,56 @@ public class MainWindow extends JPanel implements
             pyramid.setRotateY(pyramid.getRotateY() - 15);
             cubeLighting.setRotateY(cubeLighting.getRotateY() - 15);
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
+            pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
         }
         else if (key == KeyEvent.VK_RIGHT) {
             cube.setRotateY(cube.getRotateY() + 15);
             pyramid.setRotateY(pyramid.getRotateY() + 15);
             cubeLighting.setRotateY(cubeLighting.getRotateY() + 15);
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
+            paddle.setRotateY(paddle.getRotateY() + 15);
         }
         else if (key == KeyEvent.VK_DOWN) {
             cube.setRotateX(cube.getRotateX() + 15);
             pyramid.setRotateX(pyramid.getRotateX() + 15);
             cubeLighting.setRotateX(cubeLighting.getRotateX() + 15);
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
+            paddle.setRotateX(paddle.getRotateX() + 15);
         }
         else if (key == KeyEvent.VK_UP) {
             cube.setRotateX(cube.getRotateX() - 15);
             pyramid.setRotateX(pyramid.getRotateX() - 15);
             cubeLighting.setRotateX(cubeLighting.getRotateY() - 15);
-            pyramidLighting.setRotateX(pyramidLighting.getRotateX() - 15);
-            }
+            pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
+            paddle.setRotateX(paddle.getRotateX() + 15);
+        }
         else if (key == KeyEvent.VK_A) {
             cube.setRotateY(cube.getRotateY() - 15);
             pyramid.setRotateY(pyramid.getRotateY() - 15);
             cubeLighting.setRotateY(cubeLighting.getRotateY() - 15);
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
+            paddle.setRotateY(paddle.getRotateY() - 15);
         }
         else if (key == KeyEvent.VK_D) {
             cube.setRotateY(cube.getRotateY() + 15);
             pyramid.setRotateY(pyramid.getRotateY() + 15);
             cubeLighting.setRotateY(cubeLighting.getRotateY() + 15);
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
+            paddle.setRotateY(paddle.getRotateY() + 15);
         }
         else if (key == KeyEvent.VK_S) {
             cube.setRotateX(cube.getRotateX() + 15);
             pyramid.setRotateX(pyramid.getRotateX() + 15);
             cubeLighting.setRotateX(cubeLighting.getRotateX() + 15);
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
+            paddle.setRotateX(paddle.getRotateX() + 15);
         }
         else if (key == KeyEvent.VK_W) {
             cube.setRotateX(cube.getRotateX() - 15);
             pyramid.setRotateX(pyramid.getRotateX() - 15);
             cubeLighting.setRotateX(cubeLighting.getRotateY() - 15);
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() - 15);
+            paddle.setRotateX(paddle.getRotateX() - 15);
         }
         else if (key == KeyEvent.VK_HOME) {
             cube.setRotateY(0);
@@ -340,9 +353,10 @@ public class MainWindow extends JPanel implements
     @Override
     public void stateChanged(ChangeEvent event) {
 
-        //System.out.println("SLIDER VALUE: " + scaleSlider.getValue());
+        System.out.println("SLIDER VALUE: " + scaleSlider.getValue());
         cube.setScale(scaleSlider.getValue() / 100.0f);
         pyramid.setScale(scaleSlider.getValue() / 100.0f);
+        paddle.setScale(scaleSlider.getValue() / 100.0f);
         cubeLighting.setScale(scaleSlider.getValue() / 100.0f);
         pyramidLighting.setScale(scaleSlider.getValue() / 100.0f);
         //System.out.println(cube.getScale());
