@@ -37,9 +37,12 @@ public class MainWindow extends JPanel implements
         panel.requestFocusInWindow();
     }
 
+    //Shape objects
     Cube cube = new Cube();
     Pyramid pyramid = new Pyramid();
     CubeLighting cubeLighting = new CubeLighting();
+    PyramidLighting pyramidLighting = new PyramidLighting();
+    Paddle paddle = new Paddle();
 
     private GLJPanel display;
     private JPanel buttonPanel;
@@ -121,14 +124,32 @@ public class MainWindow extends JPanel implements
             }
         }); buttonPanel.add(selectPyramid);
 
-        JButton addLighting = new JButton(new AbstractAction("Cube Lighting") {
+        JButton addCubeLighting = new JButton(new AbstractAction("Cube Lighting") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.repaint();
                 display.addGLEventListener(cubeLighting);
                 display.requestFocusInWindow();
             }
-        }); buttonPanel.add(addLighting);
+        }); buttonPanel.add(addCubeLighting);
+
+        JButton addPyramidLighting = new JButton(new AbstractAction("Pyramid Lighting") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                display.repaint();
+                display.addGLEventListener(pyramidLighting);
+                display.requestFocusInWindow();
+            }
+        }); buttonPanel.add(addPyramidLighting);
+
+        JButton addPaddle = new JButton(new AbstractAction("Paddle") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                display.repaint();
+                display.addGLEventListener(paddle);
+                display.requestFocusInWindow();
+            }
+        }); buttonPanel.add(addPaddle);
 
     }
 
@@ -219,36 +240,74 @@ public class MainWindow extends JPanel implements
         if (key == KeyEvent.VK_LEFT) {
             cube.setRotateY(cube.getRotateY() - 15);
             pyramid.setRotateY(pyramid.getRotateY() - 15);
+            cubeLighting.setRotateY(cubeLighting.getRotateY() - 15);
+            pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
         }
         else if (key == KeyEvent.VK_RIGHT) {
             cube.setRotateY(cube.getRotateY() + 15);
             pyramid.setRotateY(pyramid.getRotateY() + 15);
+            cubeLighting.setRotateY(cubeLighting.getRotateY() + 15);
+            pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
         }
         else if (key == KeyEvent.VK_DOWN) {
             cube.setRotateX(cube.getRotateX() + 15);
             pyramid.setRotateX(pyramid.getRotateX() + 15);
+            cubeLighting.setRotateX(cubeLighting.getRotateX() + 15);
+            pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
         }
         else if (key == KeyEvent.VK_UP) {
             cube.setRotateX(cube.getRotateX() - 15);
             pyramid.setRotateX(pyramid.getRotateX() - 15);
+            cubeLighting.setRotateX(cubeLighting.getRotateY() - 15);
+            pyramidLighting.setRotateX(pyramidLighting.getRotateX() - 15);
             }
+        else if (key == KeyEvent.VK_A) {
+            cube.setRotateY(cube.getRotateY() - 15);
+            pyramid.setRotateY(pyramid.getRotateY() - 15);
+            cubeLighting.setRotateY(cubeLighting.getRotateY() - 15);
+            pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
+        }
+        else if (key == KeyEvent.VK_D) {
+            cube.setRotateY(cube.getRotateY() + 15);
+            pyramid.setRotateY(pyramid.getRotateY() + 15);
+            cubeLighting.setRotateY(cubeLighting.getRotateY() + 15);
+            pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
+        }
+        else if (key == KeyEvent.VK_S) {
+            cube.setRotateX(cube.getRotateX() + 15);
+            pyramid.setRotateX(pyramid.getRotateX() + 15);
+            cubeLighting.setRotateX(cubeLighting.getRotateX() + 15);
+            pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
+        }
+        else if (key == KeyEvent.VK_W) {
+            cube.setRotateX(cube.getRotateX() - 15);
+            pyramid.setRotateX(pyramid.getRotateX() - 15);
+            cubeLighting.setRotateX(cubeLighting.getRotateY() - 15);
+            pyramidLighting.setRotateX(pyramidLighting.getRotateX() - 15);
+        }
         else if (key == KeyEvent.VK_HOME) {
             cube.setRotateY(0);
             cube.setRotateX(0);
             pyramid.setRotateY(0);
             pyramid.setRotateX(0);
+            cubeLighting.setRotateY(0);
+            cubeLighting.setRotateX(0);
+            pyramidLighting.setRotateX(0);
+            pyramidLighting.setRotateY(0);
         }
-
         else if (key == KeyEvent.VK_G) {
 
             cube.setScale(cube.getScale() - 0.01f);
             pyramid.setScale(pyramid.getScale() - 0.01f);
+            cubeLighting.setScale(cubeLighting.getScale() - 0.01f);
+            pyramidLighting.setScale(pyramidLighting.getScale() - 0.01f);
             scaleSlider.setValue((int)(cube.getScale() * 100));
         }
-
         else if (key == KeyEvent.VK_H) {
             cube.setScale(cube.getScale() + 0.01f);
             pyramid.setScale(pyramid.getScale() + 0.01f);
+            cubeLighting.setScale(cubeLighting.getScale() + 0.01f);
+            pyramidLighting.setScale(pyramidLighting.getScale() + 0.01f);
             scaleSlider.setValue((int)(cube.getScale() * 100));
         }
         display.repaint();  // Causes the display() function to be called.
@@ -281,11 +340,13 @@ public class MainWindow extends JPanel implements
     @Override
     public void stateChanged(ChangeEvent event) {
 
-        System.out.println("SLIDER VALUE: " + scaleSlider.getValue());
+        //System.out.println("SLIDER VALUE: " + scaleSlider.getValue());
         cube.setScale(scaleSlider.getValue() / 100.0f);
         pyramid.setScale(scaleSlider.getValue() / 100.0f);
-        System.out.println(cube.getScale());
-        System.out.println(pyramid.getScale());
+        cubeLighting.setScale(scaleSlider.getValue() / 100.0f);
+        pyramidLighting.setScale(scaleSlider.getValue() / 100.0f);
+        //System.out.println(cube.getScale());
+        //System.out.println(pyramid.getScale());
 
         display.repaint();
 
