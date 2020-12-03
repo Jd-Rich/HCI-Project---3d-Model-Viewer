@@ -2,14 +2,14 @@ import com.jogamp.opengl.*;
 import com.jogamp.opengl.glu.GLU;
 
 
-public class Pyramid implements GLEventListener {
+public class PyramidLighting implements GLEventListener {
     private GLU glu = new GLU();
     //private float rtri = 0.0f;
 
     private float scale;
     private float rotateX, rotateY;
 
-    public Pyramid() {
+    public PyramidLighting() {
         this.rotateX = 0.0f;
         this.rotateY = 0.0f;
         this.scale = 0.25f;
@@ -24,76 +24,79 @@ public class Pyramid implements GLEventListener {
     public void setScale(float scale) {
         if(scale <= 0.0f) scale = 0.0f;
         else if(scale >= 1.0f) scale = 1.0f;
-
         this.scale = scale;
     }
-
 
     @Override
     public void display (GLAutoDrawable drawable) {
         final GL2 gl = drawable.getGL().getGL2();
-
-        gl.glDisable( GL2.GL_LIGHTING );
-        gl.glDisable( GL2.GL_LIGHT0 );
-        gl.glDisable( GL2.GL_NORMALIZE );
+        gl.glEnable(GL2.GL_LIGHTING);
+        gl.glEnable(GL2.GL_LIGHT0);
+        gl.glEnable(GL2.GL_NORMALIZE);
 
         gl.glClearColor(0, 0, 0, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        //gl.glOrtho(-scale,scale,-scale,scale,-2*scale,2*scale);
         gl.glScalef(scale,scale,scale);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
-        //gl.glTranslatef(0f, 0f, -5.0f);
         gl.glLoadIdentity();
 
         //Rotate the cube on X, Y, Z
         gl.glRotatef(rotateY, 0, 1.0f, 0);
         gl.glRotatef(rotateX, 1.0f, 0, 0);
+
         // Begin drawing the pyramid
         gl.glBegin(GL2.GL_TRIANGLES);
 
         // Draw 3D shape of pyramid with red, blue, green, and yellow sides
         // Front side of pyramid
         gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Left edge
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        //gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, 1.0f); // Right edge
 
         // Right side of pyramid
         gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, 1.0f); // Left edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        //gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, -1.0f); // Right edge
 
         // Left side of pyramid
         gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, -1.0f); // Left edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        //gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Right edge
 
         // Bottom side of pyramid
         gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Left edge
-        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        //gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Right edge
 
         //End pyramid drawing
         gl.glEnd();
         gl.glFlush();
 
-        //rtri += 0.2f;
         rotateX -= 0.15f;
         rotateY -= 0.15f;
+
+
+
+        float[] ambientLight = {.1f, 0.0f, 0.0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
+
+        float[] diffuseLight = {1f, 2f, 1f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
     }
 
     @Override

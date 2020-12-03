@@ -1,18 +1,26 @@
-import java.awt.DisplayMode;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.glu.GLU;
 
-import com.jogamp.opengl.*;
-import com.jogamp.opengl.glu.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+/*
+Currently works where you have to click te lighting button, then click the shape to display and it will display
+the shape with lighting enabled.
+ */
 
-
-public class Cube implements GLEventListener {
+public class CubeLighting implements GLEventListener, MouseListener {
     public static DisplayMode displayMode, displayModeOld;
     private GLU glu = new GLU();
 
     private float scale;
     private float rotateX, rotateY;
 
-    public Cube() {
+    public CubeLighting() {
         this.rotateX = 0.0f;
         this.rotateY = 0.0f;
         this.scale = 0.25f;
@@ -27,23 +35,25 @@ public class Cube implements GLEventListener {
     public void setScale(float scale) {
         if(scale <= 0.0f) scale = 0.0f;
         else if(scale >= 1.0f) scale = 1.0f;
-        this.scale = scale; }
+        this.scale = scale;
+    }
 
 
     @Override
     public void display(GLAutoDrawable drawable) {
         final GL2 gl = drawable.getGL().getGL2();
 
-        gl.glDisable( GL2.GL_LIGHTING );
-        gl.glDisable( GL2.GL_LIGHT0 );
-        gl.glDisable( GL2.GL_NORMALIZE );
+        gl.glEnable(GL2.GL_LIGHTING);
+        gl.glEnable(GL2.GL_LIGHT0);
+        gl.glEnable(GL2.GL_NORMALIZE);
 
         gl.glClearColor(0, 0, 0, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        gl.glScalef(scale,scale,scale);
+        //gl.glOrtho(-scale,scale,-scale,scale,-2*scale,2*scale);
+        gl.glScalef(scale, scale, scale);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
 
@@ -51,40 +61,39 @@ public class Cube implements GLEventListener {
         gl.glRotatef(rotateY, 0, 1.0f, 0);
         gl.glRotatef(rotateX, 1.0f, 0, 0);
 
-        //Each side of the cube has a different color
         gl.glBegin(GL2.GL_QUADS); //starts the cube drawing
 
-        gl.glColor3f(1f, 0f, 0f); //creates a red color
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
 
-        gl.glColor3f(0f, 1f, 0f); //creates a green color
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
-        gl.glColor3f(0f, 0f, 1f); //creates a blue color
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(1f, 1f, 0f); //creates a yellow color
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
 
-        gl.glColor3f(1f, 0f, 1f); //creates a purple color
+        gl.glColor3f(1f, 0f, 1f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(0f, 2f, 1f); //creates a light blue color
+        gl.glColor3f(0f, 2f, 1f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
@@ -95,6 +104,13 @@ public class Cube implements GLEventListener {
 
         rotateX -= 0.15f;
         rotateY -= 0.15f;
+
+        float[] ambientLight = {.1f, 0.0f, 0.0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
+
+        float[] diffuseLight = {1f, 2f, 1f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
+
     }
 
     @Override
@@ -126,4 +142,18 @@ public class Cube implements GLEventListener {
         gl.glMatrixMode( GL2.GL_MODELVIEW );
         gl.glLoadIdentity();
     }
+
+    //Handles when the mouse is pressed and released for rotating the cube
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseClicked(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e) { }
+    public void mouseExited(MouseEvent e) { }
+
 }
