@@ -37,6 +37,7 @@ public class MainWindow extends JPanel implements
     PyramidLighting pyramidLighting = new PyramidLighting();
     Paddle paddle = new Paddle();
     Star star = new Star();
+    Polygon10Sides polygon10Sides = new Polygon10Sides();
 
     private GLJPanel display;
     private JPanel buttonPanel;
@@ -66,7 +67,7 @@ public class MainWindow extends JPanel implements
         setLayout(new BorderLayout());
         add(display,BorderLayout.WEST);
 
-        //display.addGLEventListener(star);
+        //display.addGLEventListener(polygon10Sides);
 
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15));
         JPanel commandPanel = new JPanel(new BorderLayout());
@@ -109,11 +110,14 @@ public class MainWindow extends JPanel implements
                 star.setRedColor(randFloat());
                 star.setGreenColor(randFloat());
                 star.setBlueColor(randFloat());
+                polygon10Sides.setRedColor(randFloat());
+                polygon10Sides.setGreenColor(randFloat());
+                polygon10Sides.setBlueColor(randFloat());
 
             }
         });
 
-        miscPanel.add(newColors, BorderLayout.EAST);
+        miscPanel.add(newColors, BorderLayout.SOUTH);
 
         add(miscPanel, BorderLayout.EAST);
 
@@ -162,6 +166,18 @@ public class MainWindow extends JPanel implements
                 display.requestFocusInWindow();
             }
         }); buttonPanel.add(selectStar);
+
+        JButton selectPolygon = new JButton(new AbstractAction("Polygon(10)") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                polygon10Sides = new Polygon10Sides();
+                newColors.setVisible(true);
+
+                display.repaint();
+                display.addGLEventListener(polygon10Sides);
+                display.requestFocusInWindow();
+            }
+        }); buttonPanel.add(selectPolygon);
 
         JButton selectPyramid = new JButton(new AbstractAction("Pyramid") {
             @Override
@@ -264,23 +280,53 @@ public class MainWindow extends JPanel implements
             } else if (command.equals("Scale Up (H)")) {
                 cube.setScale(cube.getScale() + 0.1f);
                 pyramid.setScale(pyramid.getScale() + 0.1f);
+                star.setScale(star.getScale() + 0.1f);
+                polygon10Sides.setScale(polygon10Sides.getScale() + 0.1f);
+                paddle.setScale(paddle.getScale() + 0.1f);
+                cubeLighting.setScale(cubeLighting.getScale() + 0.1f);
+                pyramidLighting.setScale(pyramidLighting.getScale() + 0.1f);
                 scaleSlider.setValue((int)(cube.getScale() * 100));
             } else if (command.equals("Scale Down (G)")) {
                 cube.setScale(cube.getScale() - 0.1f);
                 pyramid.setScale(pyramid.getScale() - 0.1f);
+                star.setScale(star.getScale() - 0.1f);
+                polygon10Sides.setScale(polygon10Sides.getScale() - 0.1f);
+                paddle.setScale(paddle.getScale() - 0.1f);
+                cubeLighting.setScale(cubeLighting.getScale() - 0.1f);
+                pyramidLighting.setScale(pyramidLighting.getScale() - 0.1f);
                 scaleSlider.setValue((int)(cube.getScale() * 100));
             } else if (command.equals("Rotate Left (Left)")) {
                 cube.setRotateY(cube.getRotateY() - 15);
                 pyramid.setRotateY(pyramid.getRotateY() - 15);
+                star.setRotateY(star.getRotateY() - 15);
+                polygon10Sides.setRotateY(polygon10Sides.getRotateY() - 15);
+                paddle.setRotateY(paddle.getRotateY() - 15);
+                cubeLighting.setRotateY(cubeLighting.getRotateY() - 15);
+                pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
             } else if (command.equals("Rotate Right (Right)")) {
                 cube.setRotateY(cube.getRotateY() + 15);
                 pyramid.setRotateY(pyramid.getRotateY() + 15);
+                star.setRotateY(star.getRotateY() + 15);
+                polygon10Sides.setRotateY(polygon10Sides.getRotateY() + 15);
+                cubeLighting.setRotateY(cubeLighting.getRotateY() + 15);
+                pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
+                paddle.setRotateY(paddle.getRotateY() + 15);
             } else if (command.equals("Rotate Up (Up)")) {
                 cube.setRotateX(cube.getRotateX() - 15);
                 pyramid.setRotateX(pyramid.getRotateX() - 15);
+                star.setRotateX(star.getRotateX() - 15);
+                polygon10Sides.setRotateX(polygon10Sides.getRotateX() - 15);
+                cubeLighting.setRotateX(cubeLighting.getRotateX() - 15);
+                pyramidLighting.setRotateX(pyramidLighting.getRotateX() - 15);
+                paddle.setRotateX(paddle.getRotateX() - 15);
             } else if (command.equals("Rotate Down (Down)")) {
                 cube.setRotateX(cube.getRotateX() + 15);
                 pyramid.setRotateX(pyramid.getRotateX() + 15);
+                star.setRotateX(star.getRotateX() + 15);
+                polygon10Sides.setRotateX(polygon10Sides.getRotateX() + 15);
+                cubeLighting.setRotateX(cubeLighting.getRotateX() + 15);
+                pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
+                paddle.setRotateX(paddle.getRotateX() + 15);
             }
         }
     }
@@ -335,6 +381,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
             paddle.setRotateY(paddle.getRotateY() - 15);
             star.setRotateY(star.getRotateY() - 15);
+            polygon10Sides.setRotateY(polygon10Sides.getRotateY() - 15);
         }
         else if (key == KeyEvent.VK_RIGHT) {
             cube.setRotateY(cube.getRotateY() + 15);
@@ -343,6 +390,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
             paddle.setRotateY(paddle.getRotateY() + 15);
             star.setRotateY(star.getRotateY() + 15);
+            polygon10Sides.setRotateY(polygon10Sides.getRotateY() + 15);
         }
         else if (key == KeyEvent.VK_DOWN) {
             cube.setRotateX(cube.getRotateX() + 15);
@@ -351,6 +399,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
             paddle.setRotateX(paddle.getRotateX() + 15);
             star.setRotateX(star.getRotateX() + 15);
+            polygon10Sides.setRotateX(polygon10Sides.getRotateX() + 15);
         }
         else if (key == KeyEvent.VK_UP) {
             cube.setRotateX(cube.getRotateX() - 15);
@@ -359,6 +408,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
             paddle.setRotateX(paddle.getRotateX() + 15);
             star.setRotateX(star.getRotateX() + 15);
+            polygon10Sides.setRotateX(polygon10Sides.getRotateX() + 15);
         }
         else if (key == KeyEvent.VK_A) {
             cube.setRotateY(cube.getRotateY() - 15);
@@ -367,6 +417,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() - 15);
             paddle.setRotateY(paddle.getRotateY() - 15);
             star.setRotateY(star.getRotateY() - 15);
+            polygon10Sides.setRotateY(polygon10Sides.getRotateY() - 15);
         }
         else if (key == KeyEvent.VK_D) {
             cube.setRotateY(cube.getRotateY() + 15);
@@ -375,6 +426,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateY(pyramidLighting.getRotateY() + 15);
             paddle.setRotateY(paddle.getRotateY() + 15);
             star.setRotateY(star.getRotateY() + 15);
+            polygon10Sides.setRotateY(polygon10Sides.getRotateY() + 15);
         }
         else if (key == KeyEvent.VK_S) {
             cube.setRotateX(cube.getRotateX() + 15);
@@ -383,6 +435,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() + 15);
             paddle.setRotateX(paddle.getRotateX() + 15);
             star.setRotateX(star.getRotateX() + 15);
+            polygon10Sides.setRotateX(polygon10Sides.getRotateX() + 15);
         }
         else if (key == KeyEvent.VK_W) {
             cube.setRotateX(cube.getRotateX() - 15);
@@ -391,6 +444,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateX(pyramidLighting.getRotateX() - 15);
             paddle.setRotateX(paddle.getRotateX() - 15);
             star.setRotateX(star.getRotateX() - 15);
+            polygon10Sides.setRotateX(polygon10Sides.getRotateX() - 15);
         }
         else if (key == KeyEvent.VK_HOME) {
             cube.setRotateY(0);
@@ -403,6 +457,10 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setRotateY(0);
             star.setRotateX(0);
             star.setRotateY(0);
+            polygon10Sides.setRotateX(0);
+            polygon10Sides.setRotateY(0);
+            paddle.setRotateX(0);
+            paddle.setRotateY(0);
         }
         else if (key == KeyEvent.VK_G) {
 
@@ -412,6 +470,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setScale(pyramidLighting.getScale() - 0.01f);
             paddle.setScale(paddle.getScale() - 0.01f);
             star.setScale(star.getScale() - 0.01f);
+            polygon10Sides.setScale(polygon10Sides.getScale() - 0.01f);
             scaleSlider.setValue((int)(cube.getScale() * 100));
         }
         else if (key == KeyEvent.VK_H) {
@@ -421,6 +480,7 @@ public class MainWindow extends JPanel implements
             pyramidLighting.setScale(pyramidLighting.getScale() + 0.01f);
             paddle.setScale(paddle.getScale() + 0.01f);
             star.setScale(star.getScale() + 0.01f);
+            polygon10Sides.setScale(polygon10Sides.getScale() + 0.01f);
             scaleSlider.setValue((int)(cube.getScale() * 100));
         }
 
@@ -462,6 +522,7 @@ public class MainWindow extends JPanel implements
         cubeLighting.setScale(scaleSlider.getValue() / 100.0f);
         pyramidLighting.setScale(scaleSlider.getValue() / 100.0f);
         star.setScale(scaleSlider.getValue() / 100.0f);
+        polygon10Sides.setScale(scaleSlider.getValue() / 100.0f);
         //System.out.println(cube.getScale());
         //System.out.println(pyramid.getScale());
 
