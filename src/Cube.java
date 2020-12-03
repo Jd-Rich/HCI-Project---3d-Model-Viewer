@@ -54,40 +54,58 @@ public class Cube implements GLEventListener {
         //Each side of the cube has a different color
         gl.glBegin(GL2.GL_QUADS); //starts the cube drawing
 
-        gl.glColor3f(1f, 0f, 0f); //creates a red color
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
 
-        gl.glColor3f(0f, 1f, 0f); //creates a green color
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
-        gl.glColor3f(0f, 0f, 1f); //creates a blue color
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(1f, 1f, 0f); //creates a yellow color
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
 
-        gl.glColor3f(1f, 0f, 1f); //creates a purple color
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(0f, 2f, 1f); //creates a light blue color
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
         gl.glEnd();
