@@ -10,16 +10,23 @@ public class Pyramid implements GLEventListener {
 
     private float scale;
     private float rotateX, rotateY;
+    private float redColor, greenColor, blueColor;
 
     public Pyramid() {
         this.rotateX = 0.0f;
         this.rotateY = 0.0f;
         this.scale = 0.25f;
+        this.redColor = 1.0f;
+        this.greenColor = 1.0f;
+        this.blueColor = 1.0f;
     }
 
     public float getRotateX() { return this.rotateX; }
     public float getRotateY() { return this.rotateY; }
     public float getScale() { return this.scale; }
+    public float getRedColor() { return this.redColor; }
+    public float getGreenColor() { return this.greenColor; }
+    public float getBlueColor() { return this.blueColor; }
 
     public void setRotateX(float rotateX) { this.rotateX = rotateX; }
     public void setRotateY(float rotateY) { this.rotateY = rotateY; }
@@ -29,7 +36,9 @@ public class Pyramid implements GLEventListener {
 
         this.scale = scale;
     }
-
+    public void setRedColor(float redColor) { this.redColor = redColor; }
+    public void setGreenColor(float greenColor) { this.greenColor = greenColor; }
+    public void setBlueColor(float blueColor) { this.blueColor = blueColor; }
 
     @Override
     public void display (GLAutoDrawable drawable) {
@@ -39,7 +48,7 @@ public class Pyramid implements GLEventListener {
         gl.glDisable( GL2.GL_LIGHT0 );
         gl.glDisable( GL2.GL_NORMALIZE );
 
-        gl.glClearColor(0, 0, 0, 1.0f);
+        gl.glClearColor(    0.9f, 0.9f, 0.9f, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -58,35 +67,35 @@ public class Pyramid implements GLEventListener {
 
         // Draw 3D shape of pyramid with red, blue, green, and yellow sides
         // Front side of pyramid
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(redColor, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, greenColor, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Left edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, blueColor); // Face color
         gl.glVertex3f(1.0f, -1.0f, 1.0f); // Right edge
 
         // Right side of pyramid
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(redColor, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, blueColor); // Face color
         gl.glVertex3f(1.0f, -1.0f, 1.0f); // Left edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, greenColor, 0.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, -1.0f); // Right edge
 
         // Left side of pyramid
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(redColor, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, greenColor, 0.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, -1.0f); // Left edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, blueColor); // Face color
         gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Right edge
 
         // Bottom side of pyramid
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(redColor, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, blueColor); // Face color
         gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Left edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, greenColor, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Right edge
 
         //End pyramid drawing

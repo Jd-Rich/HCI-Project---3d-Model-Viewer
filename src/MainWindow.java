@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.event.*;
 
 import com.jogamp.opengl.*;
@@ -41,10 +43,17 @@ public class MainWindow extends JPanel implements
 
     private JSlider scaleSlider;
     private JToggleButton playAnimation;
+    private JButton newColors;
 
     private Timer animationTimer;
 
     private int frameNumber = 0;  // The current frame number for an animation.
+
+    public float randFloat() {
+        Random rand = new Random();
+
+        return rand.nextFloat();
+    }
 
     public MainWindow() {
         GLProfile profile = GLProfile.get(GLProfile.GL2);
@@ -52,6 +61,7 @@ public class MainWindow extends JPanel implements
 
         display = new GLJPanel(caps);
         display.setPreferredSize( new Dimension(600,600) );
+        display.setBorder(new LineBorder(Color.blue));
         setLayout(new BorderLayout());
         add(display,BorderLayout.WEST);
 
@@ -84,6 +94,20 @@ public class MainWindow extends JPanel implements
         JPanel miscPanel = new JPanel(new BorderLayout());
         miscPanel.add(playAnimation, BorderLayout.NORTH);
 
+        newColors = new JButton(new AbstractAction("Change Color") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cube.setRedColor(randFloat());
+                cube.setGreenColor(randFloat());
+                cube.setBlueColor(randFloat());
+                pyramid.setRedColor(randFloat());
+                pyramid.setGreenColor(randFloat());
+                pyramid.setBlueColor(randFloat());
+            }
+        });
+
+        miscPanel.add(newColors, BorderLayout.EAST);
+
         add(miscPanel, BorderLayout.EAST);
 
         add(commandPanel, BorderLayout.SOUTH);
@@ -112,6 +136,7 @@ public class MainWindow extends JPanel implements
             @Override
             public void actionPerformed(ActionEvent e) {
                 cube = new Cube();
+                newColors.setVisible(true);
 
                 display.repaint();
                 display.addGLEventListener(cube);
@@ -123,6 +148,7 @@ public class MainWindow extends JPanel implements
             @Override
             public void actionPerformed(ActionEvent e) {
                 pyramid = new Pyramid();
+                newColors.setVisible(true);
 
                 display.repaint();
                 display.addGLEventListener(pyramid);
@@ -134,6 +160,7 @@ public class MainWindow extends JPanel implements
             @Override
             public void actionPerformed(ActionEvent e) {
                 paddle = new Paddle();
+                newColors.setVisible(false);
 
                 display.repaint();
                 display.addGLEventListener(paddle);
@@ -146,6 +173,7 @@ public class MainWindow extends JPanel implements
             public void actionPerformed(ActionEvent e) {
 
                 cubeLighting = new CubeLighting();
+                newColors.setVisible(false);
 
                 display.repaint();
                 display.addGLEventListener(cubeLighting);
@@ -157,7 +185,7 @@ public class MainWindow extends JPanel implements
             @Override
             public void actionPerformed(ActionEvent e) {
                 pyramidLighting = new PyramidLighting();
-
+                newColors.setVisible(false);
                 display.repaint();
                 display.addGLEventListener(pyramidLighting);
                 display.requestFocusInWindow();

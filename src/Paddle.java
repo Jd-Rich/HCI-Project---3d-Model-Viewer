@@ -39,7 +39,7 @@ public class Paddle implements GLEventListener {
         gl.glDisable( GL2.GL_LIGHT0 );
         gl.glDisable( GL2.GL_NORMALIZE );
 
-        gl.glClearColor(0,0,0,1.0f);
+        gl.glClearColor(0.9f,0.9f,0.9f,1.0f);
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);

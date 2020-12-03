@@ -47,7 +47,7 @@ public class CubeLighting implements GLEventListener, MouseListener {
         gl.glEnable(GL2.GL_LIGHT0);
         gl.glEnable(GL2.GL_NORMALIZE);
 
-        gl.glClearColor(0, 0, 0, 1.0f);
+        gl.glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -62,42 +62,60 @@ public class CubeLighting implements GLEventListener, MouseListener {
         gl.glRotatef(rotateX, 1.0f, 0, 0);
 
         gl.glBegin(GL2.GL_QUADS); //starts the cube drawing
-
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
 
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
         gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, -1.0f, 1.0f);
-
         gl.glColor3f(1f, 1f, 0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
 
-        gl.glColor3f(1f, 0f, 1f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(0f, 2f, 1f);
+        gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
+
 
         gl.glEnd();
         gl.glFlush();
@@ -105,10 +123,15 @@ public class CubeLighting implements GLEventListener, MouseListener {
         rotateX -= 0.15f;
         rotateY -= 0.15f;
 
-        float[] ambientLight = {.1f, 0.0f, 0.0f};
+
+
+        float[] ambientLight = {0f, 0f, 1f, 0f};
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
 
-        float[] diffuseLight = {1f, 2f, 1f, 0f};
+        float[] specularLight = {1f, 0f, 0f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specularLight, 0);
+
+        float[] diffuseLight = {1f, 0f, 0f, 0f};
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
 
     }

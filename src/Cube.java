@@ -11,23 +11,34 @@ public class Cube implements GLEventListener {
 
     private float scale;
     private float rotateX, rotateY;
+    private float redColor, greenColor, blueColor;
 
     public Cube() {
         this.rotateX = 0.0f;
         this.rotateY = 0.0f;
         this.scale = 0.25f;
+        this.redColor = 1.0f;
+        this.greenColor = 1.0f;
+        this.blueColor = 1.0f;
     }
 
     public float getRotateX() { return this.rotateX; }
     public float getRotateY() { return this.rotateY; }
     public float getScale() { return this.scale; }
+    public float getRedColor() { return this.redColor; }
+    public float getGreenColor() { return this.greenColor; }
+    public float getBlueColor() { return this.blueColor; }
 
     public void setRotateX(float rotateX) { this.rotateX = rotateX; }
     public void setRotateY(float rotateY) { this.rotateY = rotateY; }
     public void setScale(float scale) {
         if(scale <= 0.0f) scale = 0.0f;
         else if(scale >= 1.0f) scale = 1.0f;
-        this.scale = scale; }
+        this.scale = scale;
+    }
+    public void setRedColor(float redColor) { this.redColor = redColor; }
+    public void setGreenColor(float greenColor) { this.greenColor = greenColor; }
+    public void setBlueColor(float blueColor) { this.blueColor = blueColor; }
 
 
     @Override
@@ -38,7 +49,7 @@ public class Cube implements GLEventListener {
         gl.glDisable( GL2.GL_LIGHT0 );
         gl.glDisable( GL2.GL_NORMALIZE );
 
-        gl.glClearColor(0, 0, 0, 1.0f);
+        gl.glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -54,58 +65,58 @@ public class Cube implements GLEventListener {
         //Each side of the cube has a different color
         gl.glBegin(GL2.GL_QUADS); //starts the cube drawing
 
-        gl.glColor3f(1f, 0f, 0f);
+        gl.glColor3f(redColor, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        gl.glColor3f(redColor, greenColor, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(0f, greenColor, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        gl.glColor3f(0f, 0f, blueColor);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
 
-        gl.glColor3f(1f, 1f, 0f);
+        gl.glColor3f(redColor, greenColor, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        gl.glColor3f(redColor, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        gl.glColor3f(0f, 0f, blueColor);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(0f, greenColor, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
-        gl.glColor3f(0f, 0f, 1f);
+        gl.glColor3f(0f, 0f, blueColor);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(0f, greenColor, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        gl.glColor3f(redColor, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        gl.glColor3f(redColor, greenColor, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(0f, greenColor, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        gl.glColor3f(0f, 0f, blueColor);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        gl.glColor3f(redColor, greenColor, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        gl.glColor3f(redColor, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
 
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(0f, greenColor, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        gl.glColor3f(redColor, greenColor, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        gl.glColor3f(0f, 0f, blueColor);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        gl.glColor3f(redColor, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(1f, 0f, 0f);
+        gl.glColor3f(redColor, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        gl.glColor3f(0f, 0f, blueColor);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        gl.glColor3f(redColor, greenColor, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        gl.glColor3f(0f, greenColor, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
         gl.glEnd();

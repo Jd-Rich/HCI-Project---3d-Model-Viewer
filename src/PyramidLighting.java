@@ -34,7 +34,7 @@ public class PyramidLighting implements GLEventListener {
         gl.glEnable(GL2.GL_LIGHT0);
         gl.glEnable(GL2.GL_NORMALIZE);
 
-        gl.glClearColor(0, 0, 0, 1.0f);
+        gl.glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -94,6 +94,9 @@ public class PyramidLighting implements GLEventListener {
 
         float[] ambientLight = {.1f, 0.0f, 0.0f};
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
+
+        float[] specularLight = {1f, 0f, 0f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specularLight, 0);
 
         float[] diffuseLight = {1f, 2f, 1f, 0f};
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
