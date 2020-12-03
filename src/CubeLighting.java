@@ -47,6 +47,15 @@ public class CubeLighting implements GLEventListener, MouseListener {
         gl.glEnable(GL2.GL_LIGHT0);
         gl.glEnable(GL2.GL_NORMALIZE);
 
+        float[] ambientLight = {0f, 0f, 1f, 1f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
+
+        float[] specularLight = {0f, 0f, 1f, 1f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specularLight, 0);
+
+        float[] diffuseLight = {0f, 0f, 1f, 1f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
+
         gl.glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
@@ -62,58 +71,58 @@ public class CubeLighting implements GLEventListener, MouseListener {
         gl.glRotatef(rotateX, 1.0f, 0, 0);
 
         gl.glBegin(GL2.GL_QUADS); //starts the cube drawing
-        gl.glColor3f(1f, 0f, 0f);
+        //gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        //gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        //gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        //gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
 
-        gl.glColor3f(1f, 1f, 0f);
+        //gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        //gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        //gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        //gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
-        gl.glColor3f(0f, 0f, 1f);
+        //gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        //gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        //gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        //gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(0f, 1f, 0f);
+        //gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        //gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        //gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        //gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
 
-        gl.glColor3f(0f, 1f, 0f);
+        //gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        //gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        //gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glColor3f(1f, 0f, 0f);
+        //gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
 
-        gl.glColor3f(1f, 0f, 0f);
+        //gl.glColor3f(1f, 0f, 0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glColor3f(0f, 0f, 1f);
+        //gl.glColor3f(0f, 0f, 1f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glColor3f(1f, 1f, 0f);
+        //gl.glColor3f(1f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glColor3f(0f, 1f, 0f);
+        //gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
 
 
@@ -125,14 +134,7 @@ public class CubeLighting implements GLEventListener, MouseListener {
 
 
 
-        float[] ambientLight = {0f, 0f, 1f, 0f};
-        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambientLight, 0);
 
-        float[] specularLight = {1f, 0f, 0f, 0f};
-        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specularLight, 0);
-
-        float[] diffuseLight = {1f, 0f, 0f, 0f};
-        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0);
 
     }
 
