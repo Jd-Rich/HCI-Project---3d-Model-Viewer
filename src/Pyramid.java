@@ -1,6 +1,8 @@
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.glu.GLU;
 
+import java.util.Random;
+
 
 public class Pyramid implements GLEventListener {
     private GLU glu = new GLU();
@@ -58,33 +60,33 @@ public class Pyramid implements GLEventListener {
         // Front side of pyramid
         gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Left edge
-        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, 1.0f); // Right edge
 
         // Right side of pyramid
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
         gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, 1.0f); // Left edge
-        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
+        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, -1.0f); // Right edge
 
         // Left side of pyramid
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
         gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, -1.0f, -1.0f); // Left edge
-        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Right edge
 
         // Bottom side of pyramid
-        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(1.0f, 0.0f, 0.0f); // Face color
         gl.glVertex3f(1.0f, 2.0f, 0.0f); // Bottom edge
-        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, 0.0f, 1.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, -1.0f); // Left edge
-        gl.glColor3f(1.0f, 1.0f, 0.0f); // Face color
+        gl.glColor3f(0.0f, 1.0f, 0.0f); // Face color
         gl.glVertex3f(-1.0f, -1.0f, 1.0f); // Right edge
 
         //End pyramid drawing
@@ -127,4 +129,5 @@ public class Pyramid implements GLEventListener {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
+
 }
